@@ -25,12 +25,6 @@ double gaussError(int inc,double error,double a,double b){
 		sum = 0;
 		j ++;
 		ij = ik;
-	}while(d > error);
+	}while(d > error && j <= 100);
 	return ik;
-}
-double deltaX(int n,double a,double b){
-	return (b - a)/n;
-}
-double f(double x){
-	return x*x;
 }
