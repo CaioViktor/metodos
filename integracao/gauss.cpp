@@ -20,7 +20,7 @@ double gaussError(int inc,double error,double a,double b){
 			sum += f(x);
 		}
 		ik = delta*sum;
-		d = ik-ij;
+		d = fabs((ik-ij)/ik);
 		
 		sum = 0;
 		j ++;
