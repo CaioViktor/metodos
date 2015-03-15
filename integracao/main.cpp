@@ -1,7 +1,7 @@
 #include "main.h"
 
 double f(double x){
-	return pow(x,2);
+	return 1 + pow((x/2),2);
 }
 double deltaX(int n,double a,double b){
 	return (b - a)/n;
