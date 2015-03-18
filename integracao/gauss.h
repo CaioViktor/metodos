@@ -1,2 +1,3 @@
-double gauss(int n,double a,double b);
-double gaussError(int j,double error,double a, double b);
+double gaussLegendre(int n,double a,double b);
+double gaussLegendreError(int j,double error,double a, double b);
+double gE(double a, double b, double e);

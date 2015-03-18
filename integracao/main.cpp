@@ -1,6 +1,7 @@
 #include "main.h"
 
 double f(double x){
+	// return 1 + pow((x/2),2);
 	return 1 + pow((x/2),2);
 }
 double deltaX(int n,double a,double b){
@@ -8,10 +9,8 @@ double deltaX(int n,double a,double b){
 }
 int main(){
 	setprecision(20);
-	// cout << "Integral de x² de 0 ate 1: \n"<<gauss(20,0,1)<<endl;
-	// cout << "Integral de x² de 0 ate 1 com erro de 0.001:\n" <<gaussError(2,0.001,0,1)<<endl;
-	
-	// cout << "Integral de x² de 0 ate 1 newton grau 1: \n"<< newton(2,0,1,1,true) << endl;
+	// cout << "(I : (x²/4) + 1) de 0 ate 1 gauss legandre de 2 pontos: " << gaussLegendre(2,0,1)<<endl;
+	// cout << "Integral de (x²/4) + 1) de 0 ate 1 newton grau 1: \n"<< newton(2,0,1,2,true) << endl;
 	// cout << "Integral de x² de 0 ate 1 newton grau 2: \n"<< newton(2,0,1,2,true) << endl;
 	// cout << "Integral de x² de 0 ate 1 newton grau 3: \n"<< newton(2,0,1,3,true) << endl;
 
@@ -57,14 +56,14 @@ int main(){
 			return 0;
 		break;
 	}
-	cout << "Entre o método:\n(1)Gauss\n(2)Newton-Cotes\n";
+	cout << "Entre o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n";
 	cin >> op;
 	switch(op){
 		case 1:
 			if(whithError)
-				value = gaussError(n,error,a,b);
+				value = gaussLegendreError(n,error,a,b);
 			else
-				value = gauss(n,a,b);
+				value = gaussLegendre(n,a,b);
 		break;
 		case 2:
 			int degree;
@@ -85,5 +84,6 @@ int main(){
 		break;	
 	}
 	cout << "Integral = " << value<<endl;
+
 	return 0;
 }
