@@ -75,7 +75,24 @@ double gaussLegendre(int n,double a,double b){
 	return i * (b-a)/2 ;
 }
 double gaussLegendreError(int j,double error,double a, double b){
-	return 0;
+	int n = 1,v = 1;
+	double dif,ij = 0,ik;
+	do{
+		n += j;
+		double delta  = deltaX(n,a,b);
+		double ak = a, bk = a + delta;
+		ik = 0;
+		while(bk <= b){
+			ik += gaussLegendre(4,ak,bk);
+			ak = bk;
+			bk += delta;
+		}
+		dif = fabs(ik - ij);
+		ij = ik;
+		cout << "loop " << ik << endl;
+		v++;
+	}while(dif > error && v <= 100);
+	return ik;
 }
 double gE(double a, double b, double e){
 	double x = ((a+b)/2) + (e*( (b-a)/2 ));

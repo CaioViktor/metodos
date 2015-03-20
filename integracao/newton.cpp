@@ -16,7 +16,7 @@ double newtonError(int inc,double a,double b,double error,int grau,bool fechado)
 	do{
 		n = j + inc;
 		ik = newton(n,a,b,grau,fechado);
-		dif = fabs((ik - ij));
+		dif = fabs(ik - ij);
 		ij = ik;
 		j++;
 	}while(dif > error && j <= 100);

@@ -1,16 +1,17 @@
 #include "main.h"
 
 double f(double x){
-	// return 1 + pow((x/2),2);
 	return 1 + pow((x/2),2);
+	// return pow(x,9);
 }
 double deltaX(int n,double a,double b){
 	return (b - a)/n;
 }
 int main(){
 	setprecision(20);
-	// cout << "(I : (x²/4) + 1) de 0 ate 1 gauss legandre de 2 pontos: " << gaussLegendre(2,0,1)<<endl;
+	// cout << "(I : (x²/4) + 1) de 0 ate 1 gauss legandre de 2 pontos: " << gaussLegendre(4,0,1)<<endl;
 	// cout << "Integral de (x²/4) + 1) de 0 ate 1 newton grau 1: \n"<< newton(2,0,1,2,true) << endl;
+	// cout << "(I : (x²/4) + 1) de 0 ate 1 gauss legandre de 2 pontos com erro 0.001: " << gaussLegendreError(2,0.001,0,1)<<endl;
 	// cout << "Integral de x² de 0 ate 1 newton grau 2: \n"<< newton(2,0,1,2,true) << endl;
 	// cout << "Integral de x² de 0 ate 1 newton grau 3: \n"<< newton(2,0,1,3,true) << endl;
 
@@ -37,33 +38,28 @@ int main(){
 	cin >> a;
 	cout << "entre com o limite superior de integração (b):"<<endl;
 	cin >> b;
-	cout<< "Voce deseja utilizar:\n(1)quantidade de particoes fixa \n(2)erro \n";
+	cout << "Deseja entrar com limite erro? \n1)Sim\n2)Nao\n";
 	cin >> op;
-	switch(op){
-		case 1:
-			cout << "entre com o numero de particoes:\n";
-			cin >> n;
-		break;
-		case 2:
-			cout << "Entre com o erro\n";
-			cin >> error;
-			cout << "entre com o incremento de particoes:\n";
-			cin >> n;
-			whithError = true;
-		break;
-		default:
-			cout << "opcao invalida\n";
-			return 0;
-		break;
+	if(op == 1){
+		cout << "Entre com o erro\n";
+		cin >> error;
+		cout << "entre com o incremento de particoes:\n";
+		cin >> n;
+		whithError = true;
 	}
-	cout << "Entre o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n";
+	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n";
 	cin >> op;
+	
 	switch(op){
 		case 1:
+
 			if(whithError)
-				value = gaussLegendreError(n,error,a,b);
-			else
+				value = gaussLegendreError(4,error,a,b);
+			else{
+				cout << "Entre com o numero de pontos amostrais\n";
+				cin >> n;
 				value = gaussLegendre(n,a,b);
+			}
 		break;
 		case 2:
 			int degree;
@@ -75,8 +71,11 @@ int main(){
 				fechado = false;
 			if(whithError)
 				value = newtonError(n,a,b,error,degree,fechado);
-			else
+			else{
+				cout << "entre com o numero de particoes:\n";
+				cin >> n;	
 				value = newton(n,a,b,degree,fechado);
+			}
 		break;
 		default:
 			cout << "opcao invalida\n";
