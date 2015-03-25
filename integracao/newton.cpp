@@ -53,6 +53,14 @@ double integralG(double a,double b,int grau,bool fechado){
 				somaF = (5 * (11*f(a+delta) +( f(a+2*delta) )+ ( f(a + 3*delta) ) +11*f(a + 4*delta)))/24;	
 			}
 		break;
+		case 4:
+			if(fechado){
+				somaF = (4 * ( 7*f(a) + 32*f(a+delta) + 12*f(a+2*delta) + 32*f(a+3*delta)+7*f(b) ))/90;
+			}
+			else{
+				somaF = ( 6 * ( 11*f(a) -14*f(a+delta) + 26*f(a+2*delta) - 14*f(a+3*delta) + 11*f(b) ) )/20;	
+			}
+		break;
 	}
 	return delta*somaF;
 }
