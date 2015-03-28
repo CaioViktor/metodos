@@ -31,9 +31,33 @@ int main(){
 
 
 	double a,b,error,value;
-	int op,n;
+	int op,n,metodo;
 	bool whithError = false,fechado = true;
 
+	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n(3)Gauss-Chebyshev\n(4)Gauss-Laguerre\n(5)Gauss-Hermite\n";
+	cin >> metodo;
+	if( metodo > 2){
+		cout << "Entre com o valor de N:\n";
+		cin >> n;
+		switch(metodo){
+			case 3:
+				value =  gaussHermite( n);
+			break;
+			case 4:
+				value =  gaussLaguerre( n);
+			break;
+			case 5:
+				value =  gaussChebyshev( n);
+			break;
+			default:
+				cout << "Opcao invalida\n";
+				return 0;
+			break;
+		}
+		cout << "Integral: " << value << endl;
+		return 0;
+	}
+	
 	cout << "entre com o limite inferior de integração (a):"<<endl;
 	cin >> a;
 	cout << "entre com o limite superior de integração (b):"<<endl;
@@ -47,10 +71,7 @@ int main(){
 		cin >> n;
 		whithError = true;
 	}
-	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n";
-	cin >> op;
-	
-	switch(op){
+	switch(metodo){
 		case 1:
 
 			if(whithError)

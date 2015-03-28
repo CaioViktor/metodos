@@ -1,34 +1,4 @@
 #include "main.h"
-// double gauss(int n,double a,double b){
-// 	double sum = 0;
-// 	double delta = deltaX(n,a,b);
-// 	for(int i = 0;i<n;i++){
-// 		double x = a + (2*i + 1 ) * delta / 2;
-// 		sum += f(x);
-// 	}
-// 	return sum * delta;
-// }
-// double gaussError(int inc,double error,double a,double b){
-// 	double sum = 0,d,ik,ij;
-// 	int j;
-// 	j = 1;
-// 	do{
-// 		int n = j + inc;
-// 		double delta = deltaX(n,a,b);
-// 		for(int i = 0;i < n;i++){
-// 			double x = a + (2*i + 1 ) * delta / 2;
-// 			sum += f(x);
-// 		}
-// 		ik = delta*sum;
-// 		d = fabs((ik-ij)/ik);
-		
-// 		sum = 0;
-// 		j ++;
-// 		ij = ik;
-// 	}while(d > error && j <= 100);
-// 	return ik;
-// }
-
 double gaussLegendre(int n,double a,double b){
 	double e[n],w[n],i = 0;
 	switch(n){
@@ -76,7 +46,7 @@ double gaussLegendre(int n,double a,double b){
 }
 
 
-double gaussHermite(int n,double a,double b){
+double gaussHermite(int n){
 	double e[n],w[n],i = 0;
 	switch(n){
 		case 2:
@@ -113,11 +83,11 @@ double gaussHermite(int n,double a,double b){
 		break;
 	}
 	for(int c = 0 ; c < n; c++)
-		i+= f(e[c]) * w[c];//TODO: usar f(xi) = physicists' Hermite polynomials
+		i+= f(e[c]) * w[c];
 	return i;
 }
 
-double gaussLaguerre(int n,double a,double b){
+double gaussLaguerre(int n){
 	double e[n],w[n],i = 0;
 	switch(n){
 		case 2:
@@ -154,11 +124,11 @@ double gaussLaguerre(int n,double a,double b){
 		break;
 	}
 	for(int c = 0 ; c < n; c++)
-		i+= f(e[c]) * w[c];// TODO f(x) = f(xi) = polinômio de laguerre
+		i+= f(e[c]) * w[c];
 	return i;
 }
 
-double gaussChebyshev(int n,double a,double b){
+double gaussChebyshev(int n){
 	double i = 0;
 	for(int k = 0 ; k <= n; k++)
 		i+= f(cos((2*k -1)*(M_PI/n) )); 
