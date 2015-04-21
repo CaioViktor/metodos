@@ -34,8 +34,16 @@ int main(){
 	int op,n,metodo;
 	bool whithError = false,fechado = true;
 
-	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n(3)Gauss-Chebyshev\n(4)Gauss-Laguerre\n(5)Gauss-Hermite\n";
+	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n(3)Gauss-Chebyshev\n(4)Gauss-Laguerre\n(5)Gauss-Hermite\n(6)Com singularidade\n";
 	cin >> metodo;
+	if(metodo == 6){
+		cout << "Entre com o erro\n";
+		cin >> error;
+		cout << "Deseja usar exponencial:\n(1)Simples\n(2)Dupla\n";
+		cin >> op;
+		cout << "Resultado " << iE(10,error,op) << endl;
+		return 0;
+	}
 	if( metodo > 2){
 		cout << "Entre com o valor de N:\n";
 		cin >> n;
