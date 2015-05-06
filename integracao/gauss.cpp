@@ -151,7 +151,7 @@ double gaussLegendreError(int j,double error,double a, double b){
 		}
 		dif = fabs(ik - ij);
 		ij = ik;
-		cout << "loop " << ik << endl;
+		// cout << "loop " << ik << endl;
 		v++;
 	}while(dif > error && v <= 100);
 	return ik;
