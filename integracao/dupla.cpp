@@ -14,11 +14,11 @@ double doubleIntegration(int j,double error,double a, double b){
 		double ak = a, bk = a + delta;
 		ik = 0;
 		while(bk <= b){
-			ik += gaussLegendre(4,ak,bk);
+			ik += gaussLegendreX(4,ak,bk);
 			ak = bk;
 			bk += delta;
 		}
-		ik *= integralZ(j,error,-fZ(ik),fZ(ik));
+		ik *= integralZ(j,error,fZ(a),fZ(b));
 		dif = fabs(ik - ij);
 		ij = ik;
 		// cout << "loop " << ik << endl;
@@ -89,7 +89,7 @@ double integralZ(int j,double error,double a, double b){
 		double ak = a, bk = a + delta;
 		ik = 0;
 		while(bk <= b){
-			ik += gaussLegendre(4,ak,bk);
+			ik += gaussLegendreZ(4,ak,bk);
 			ak = bk;
 			bk += delta;
 		}

@@ -1,8 +1,9 @@
 #include "main.h"
 
 double f(double x){
-	return 1 + pow((x/2),2);
+	// return 1 + pow((x/2),2);
 	// return pow(x,9);
+	return x;
 }
 double deltaX(int n,double a,double b){
 	return (b - a)/n;
@@ -33,8 +34,8 @@ int main(){
 	double a,b,error,value;
 	int op,n,metodo;
 	bool whithError = false,fechado = true;
-
-	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n(3)Gauss-Chebyshev\n(4)Gauss-Laguerre\n(5)Gauss-Hermite\n(6)Com singularidade\n";
+	// cout << doubleIntegration(1,0.001,0,1) << endl;
+	cout << "Entre com o método:\n(1)Gauss-Legendre\n(2)Newton-Cotes\n(3)Gauss-Chebyshev\n(4)Gauss-Laguerre\n(5)Gauss-Hermite\n(6)Com singularidade\n(7)Dupla:\n";
 	cin >> metodo;
 	if(metodo == 6){
 		cout << "Entre com o erro\n";
@@ -44,7 +45,7 @@ int main(){
 		cout << "Resultado " << iE(10,error,op) << endl;
 		return 0;
 	}
-	if( metodo > 2){
+	if( metodo > 2 && metodo != 7){
 		cout << "Entre com o valor de N:\n";
 		cin >> n;
 		switch(metodo){
@@ -70,13 +71,19 @@ int main(){
 	cin >> a;
 	cout << "entre com o limite superior de integração (b):"<<endl;
 	cin >> b;
-	cout << "Deseja entrar com limite erro? \n1)Sim\n2)Nao\n";
-	cin >> op;
-	if(op == 1){
+	if(metodo != 7){
+		cout << "Deseja entrar com limite erro? \n1)Sim\n2)Nao\n";
+		cin >> op;
+	}
+	if(op == 1 || metodo == 7){
 		cout << "Entre com o erro\n";
 		cin >> error;
 		cout << "entre com o incremento de particoes:\n";
 		cin >> n;
+		if(metodo == 7){
+			cout << "Resultado: " << doubleIntegration(n,error,a,b) << endl;
+			return 0;
+		}
 		whithError = true;
 	}
 	switch(metodo){
