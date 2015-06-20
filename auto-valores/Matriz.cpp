@@ -61,9 +61,12 @@ Matriz Matriz::operator * (double constante){
 void Matriz::operator = (Matriz matriz){
 	this->colunas = matriz.getColunas();
 	this->linhas = matriz.getLinhas();
-	for(int i = 0 ; i < linhas ; i++)
+	this->valores = new double*[linhas];
+	for(int i = 0 ; i < linhas ; i++){
+		valores[i] = new double[colunas];
 		for(int j = 0 ; j < colunas ; j++)
 			this->setValor(i,j, matriz.getValor(i,j));
+	}
 }
 
 void Matriz::show(){
@@ -73,4 +76,10 @@ void Matriz::show(){
 		cout << endl;
 	}
 
+}
+Matriz Matriz::transaposta(){
+	Matriz resultante(this->colunas,this->linhas);
+	for(int i = 0 ; i < this->linhas ; i++)
+		for(int j = 0 ; j < this->colunas ; j++)
+			resultante.setValor(i,j,this->getValor(j,i));
 }

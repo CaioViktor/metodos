@@ -3,3 +3,4 @@
 using namespace std;
 #include "Matriz.h"
 #include "Vetor.h"
+#include "potencias.h"

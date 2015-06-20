@@ -2,7 +2,9 @@
 Vetor::Vetor(int dimensao) : Matriz(dimensao,1){
 	
 }
-
+Vetor::Vetor() : Matriz(){
+	
+}
 Vetor Vetor::operator * (Vetor vetor){
 	if(this->getLinhas() != vetor.getLinhas())
 		return Vetor(0);
@@ -20,6 +22,10 @@ double Vetor::operator & (Vetor vetor){
 		resultante += this->getValor(i) * vetor.getValor(i);
 	return resultante;
 }
+void Vetor::operator = (Matriz matriz){
+	Matriz::operator=(matriz);
+}
+
 double Vetor::normaEuclidiana(){
 	return (*this) & (*this);
 }
@@ -29,4 +35,11 @@ void Vetor::setValor(int linha, double valor){
 }
 double Vetor::getValor(int linha){
 	return Matriz::getValor(linha,0);
+}
+
+Vetor Vetor::operator * (double constante){
+	Vetor resultante(this->getLinhas());
+	for(int i = 0 ; i < this->getLinhas() ; i++)
+		resultante.setValor(i, this->getValor(i) * constante );
+	return resultante;
 }
