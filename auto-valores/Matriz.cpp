@@ -47,7 +47,7 @@ Matriz Matriz::operator * (Matriz matriz){
 	for(int i = 0 ; i < resultante.linhas ; i++)
 		for(int j = 0 ; j < resultante.colunas ; j++)
 			for(int k = 0 ; k < this->colunas ; k ++)
-				resultante.setValor(i,j,resultante.getValor(i,j) + (this->getValor(i,k)* matriz.getValor(j,k)));
+				resultante.setValor(i,j,resultante.getValor(i,j) + (this->getValor(i,k) * matriz.getValor(k,j)));
 	return resultante;
 }
 Matriz Matriz::operator * (double constante){
