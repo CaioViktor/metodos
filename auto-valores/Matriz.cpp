@@ -83,3 +83,4 @@ Matriz Matriz::transaposta(){
 		for(int j = 0 ; j < this->colunas ; j++)
 			resultante.setValor(i,j,this->getValor(j,i));
 }
+

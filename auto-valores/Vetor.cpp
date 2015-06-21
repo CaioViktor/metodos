@@ -14,6 +14,15 @@ Vetor Vetor::operator * (Vetor vetor){
 	return resultante;
 }
 
+Vetor Vetor::operator * (Matriz matriz){
+	if(this->getLinhas() != matriz.getLinhas())
+		return Vetor(0);
+	Vetor resultante(this->getLinhas());
+	for(int i = 0 ; i < this->getLinhas() ; i++ )
+		resultante.setValor(i,this->getValor(i) * matriz.getValor(i,0));
+	return resultante;
+}
+
 double Vetor::operator & (Vetor vetor){
 	if(this->getLinhas() != vetor.getLinhas())
 		return -1;
