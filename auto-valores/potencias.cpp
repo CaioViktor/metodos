@@ -6,29 +6,35 @@ Vetor normalizar(Vetor v){
 	return normalizado;
 }
 
-double potencia(Matriz A, Vetor x, double erro){
+Resultado potencia(Matriz A, Vetor x, double erro){
 	Vetor autoVetorNormalizado;
 	Vetor proximoAutoVetor;
 	double autoValorPassado,autoValor;
 	double dif;
+	Resultado resultado;
 
 	autoVetorNormalizado = normalizar(x);
 	proximoAutoVetor = (A * autoVetorNormalizado);
+	proximoAutoVetor = normalizar(proximoAutoVetor);
 	autoValorPassado = autoVetorNormalizado & proximoAutoVetor;
 	do{
 		autoVetorNormalizado = normalizar(proximoAutoVetor);
 		proximoAutoVetor = (A * autoVetorNormalizado);
+		proximoAutoVetor = normalizar(proximoAutoVetor);
 		autoValor = autoVetorNormalizado & proximoAutoVetor;
 		dif = fabs(autoValor - autoValorPassado);
 		autoValorPassado = autoValor;
+		// cout << "foi: " << autoValor << endl;
 	}while(dif > erro);
-	return autoValor;
+	resultado.autoValor = autoValor;
+	resultado.autoVetor = autoVetorNormalizado;
+	return resultado;
 }
 
-double potenciaInversa(Matriz A, Vetor x, double erro){
+Resultado potenciaInversa(Matriz A, Vetor x, double erro){
 
 }
 
-double potenciaDeslocamento(Matriz A, Vetor x, double erro,double deslocamento){
+Resultado potenciaDeslocamento(Matriz A, Vetor x, double erro,double deslocamento){
 
 }
