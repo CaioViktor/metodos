@@ -50,6 +50,22 @@ Matriz Matriz::operator * (Matriz matriz){
 				resultante.setValor(i,j,resultante.getValor(i,j) + (this->getValor(i,k) * matriz.getValor(k,j)));
 	return resultante;
 }
+
+Matriz Matriz::operator + (Matriz matriz){
+	if(this->colunas != matriz.colunas || this->linhas != matriz.linhas)
+		return Matriz(0,0);
+	Matriz resultante(this->linhas,matriz.colunas);
+	for(int i = 0 ; i < resultante.linhas ; i++)
+		for(int j = 0 ; j < resultante.colunas ; j++)
+				resultante.setValor(i,j,(this->getValor(i,j) + matriz.getValor(i,j)));
+	return resultante;
+}
+
+Matriz Matriz::operator - (Matriz matriz){
+	Matriz negativa = matriz * -1;
+	return (*this) + negativa;
+}
+
 Matriz Matriz::operator * (double constante){
 	Matriz resultante(this->linhas,this->colunas);
 	for(int i = 0 ; i < linhas ; i++)

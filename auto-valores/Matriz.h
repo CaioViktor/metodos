@@ -11,6 +11,8 @@ public:
 	int getLinhas();
 	int getColunas();
 	Matriz operator * (Matriz matriz);
+	Matriz operator + (Matriz matriz);
+	Matriz operator - (Matriz matriz);
 	Matriz operator * (double constante);
 	void operator = (Matriz matriz);
 	Matriz transaposta();

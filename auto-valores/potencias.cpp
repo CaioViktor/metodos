@@ -62,5 +62,18 @@ Resultado potenciaInversa(Matriz A, Vetor x, double erro){
 }
 
 Resultado potenciaDeslocamento(Matriz A, Vetor x, double erro,double deslocamento){
+	Matriz identidade(A.getLinhas(),A.getColunas());
+	Matriz ABarra(A.getLinhas(),A.getColunas());
+	Resultado resultado;
+	Resultado resultadoBarra;
+	
+	identidade.identidade();
+	ABarra = A - (identidade * deslocamento);
+
+	resultadoBarra = potenciaInversa(ABarra,x,erro); // recebe o menor auto-vetor e auto-valor de ABarra
+	
+	resultado.autoValor = resultadoBarra.autoValor + deslocamento;
+	resultado.autoVetor = resultadoBarra.autoVetor;
+	return resultado;
 
 }

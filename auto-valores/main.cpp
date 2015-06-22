@@ -66,5 +66,19 @@ int main(){
 	r2.autoVetor.show();
 	cout << "=\n";
 	(r2.autoVetor * r2.autoValor).show();
+
+	cout << "\n\n\n potencia Deslocamento:\n";
+	Resultado r3 = potenciaDeslocamento(m, v, 0.001,2);
+	m.show();
+	cout << "* autoVetor:\n";
+	r3.autoVetor.show();
+	cout << "=\n";
+	(m*r3.autoVetor).show();
+	cout << "------------------------\n autoValor: \n";
+	cout << r3.autoValor << endl;
+	cout << "*\n";
+	r3.autoVetor.show();
+	cout << "=\n";
+	(r3.autoVetor * r3.autoValor).show();
 	return 0;
 }
