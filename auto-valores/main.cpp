@@ -81,11 +81,17 @@ int main(){
 	cout << "=\n";
 	(r3.autoVetor * r3.autoValor).show();
 
-	cout << "HauseHolder:\n";
+	cout << "---------------------------------\nHouseHolder\nMatriz:\n";
 	Matriz m2(4,4);
+
 	for(int i = 0 ; i < 4 ; i++)
 		for(int j = 0 ; j < 4 ; j++)
 			m2.setValor(i,j,i+j+1);
-	HouseHolder(m2).show();
+	m2.show();
+	cout << "Tridiagonal:\n";
+	ResultadoHouseHolder house = HouseHolder(m2);
+	house.HAH.show();
+	cout << "H:\n";
+	house.H.show();
 	return 0;
 }

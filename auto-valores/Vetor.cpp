@@ -36,7 +36,7 @@ void Vetor::operator = (Matriz matriz){
 }
 
 double Vetor::normaEuclidiana(){
-	return (*this) & (*this);
+	return sqrt((*this) & (*this));
 }
 
 void Vetor::setValor(int linha, double valor){
