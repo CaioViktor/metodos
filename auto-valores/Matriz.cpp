@@ -40,6 +40,15 @@ int Matriz::getColunas(){
 	return colunas;
 }
 
+Matriz Matriz::getMatrizColuna(int coluna){
+	if(!(coluna >= 0 && coluna < colunas))
+		return Matriz(0,0);
+	Matriz retorno (colunas,1);
+	for(int i = 0 ; i < linhas ; i++)
+		retorno.setValor(i,0,valores[i][coluna]);
+	return retorno;
+}
+
 Matriz Matriz::operator * (Matriz matriz){
 	if(this->colunas != matriz.linhas)
 		return Matriz(0,0);
@@ -95,8 +104,9 @@ void Matriz::show(){
 }
 Matriz Matriz::transaposta(){
 	Matriz resultante(this->colunas,this->linhas);
-	for(int i = 0 ; i < this->linhas ; i++)
-		for(int j = 0 ; j < this->colunas ; j++)
-			resultante.setValor(i,j,this->getValor(j,i));
+	for(int i = 0 ; i < resultante.linhas ; i++)
+		for(int j = 0 ; j < resultante.colunas ; j++)
+			resultante.setValor(i,j, this->getValor(j,i) );
+	return resultante;
 }
 

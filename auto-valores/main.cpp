@@ -80,5 +80,12 @@ int main(){
 	r3.autoVetor.show();
 	cout << "=\n";
 	(r3.autoVetor * r3.autoValor).show();
+
+	cout << "HauseHolder:\n";
+	Matriz m2(4,4);
+	for(int i = 0 ; i < 4 ; i++)
+		for(int j = 0 ; j < 4 ; j++)
+			m2.setValor(i,j,i+j+1);
+	HouseHolder(m2).show();
 	return 0;
 }

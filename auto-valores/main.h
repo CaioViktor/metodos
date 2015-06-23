@@ -5,3 +5,4 @@ using namespace std;
 #include "Vetor.h"
 Vetor resolverSistema(Matriz m,Vetor b);
 #include "potencias.h"
+#include "transformacoes.h"

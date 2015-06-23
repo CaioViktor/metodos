@@ -10,6 +10,7 @@ public:
 	double getValor(int linha,int coluna);
 	int getLinhas();
 	int getColunas();
+	Matriz getMatrizColuna(int coluna);
 	Matriz operator * (Matriz matriz);
 	Matriz operator + (Matriz matriz);
 	Matriz operator - (Matriz matriz);
