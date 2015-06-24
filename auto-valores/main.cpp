@@ -96,12 +96,12 @@ int main(){
 	jacobi.Jc.show();
 	cout << "Ak:\n";
 	jacobi.Ak.show();
-	Resultado* resultados;
-	resultados = jacobi.resultados;
+	JacobiResultados* resultados =  jacobi.resultados;
 	for(int i = 0 ; i < jacobi.Jc.getLinhas(); i++){
 		cout << "AutoValor: " << resultados[i].autoValor << endl;
-		// cout << "AutoVetor:\n " ;
-		// jacobi.resultados[i].autoVetor.show();
+		cout << "AutoVetor:\n" ;
+		jacobi.resultados[i].autoVetor.show();
+		cout << endl;
 	}
 
 

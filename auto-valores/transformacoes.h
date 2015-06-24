@@ -2,11 +2,15 @@ typedef struct ResultadoHouseHolder_{
 	Matriz H;
 	Matriz HAH;
 }ResultadoHouseHolder;
-
+class JacobiResultados{
+public:
+	double autoValor;
+	Vetor autoVetor;
+};
 typedef struct ResultadoJacobi_{
 	Matriz Jc;
 	Matriz Ak;
-	Resultado* resultados;
+	JacobiResultados* resultados;
 }ResultadoJacobi;
 int sinal(double v);
 Matriz subColuna(Matriz A, int coluna);

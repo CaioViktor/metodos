@@ -152,16 +152,16 @@ ResultadoJacobi Jacobi(Matriz A,double erro){
 	}while(soma(Ak) > erro);
 	resultante.Jc = Jc;
 	resultante.Ak = Ak;
-	Resultado resultados[A.getLinhas()];
+	JacobiResultados* resultados = new JacobiResultados[A.getLinhas()]();
 	for(int i = 0 ; i < A.getLinhas() ; i++){
 		resultados[i].autoValor = Ak.getValor(i,i);
-		cout << "Ak valor : " << resultados[i].autoValor<<endl;
+		// cout << "Ak valor : " << resultados[i].autoValor<<endl;
 		Vetor autoVetor(A.getLinhas());
 		for(int j = 0 ; j < A.getColunas() ; j++)
 			autoVetor.setValor(j, Jc.getValor(j,i));
 		resultados[i].autoVetor = autoVetor;
-		cout << "Auto vetor\n";
-		resultados[i].autoVetor.show();
+		// cout << "Auto vetor\n";
+		// resultados[i].autoVetor.show();
 	}
 	resultante.resultados = resultados;
 	return resultante;
