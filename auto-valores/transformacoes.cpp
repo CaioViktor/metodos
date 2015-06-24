@@ -1,4 +1,5 @@
 #include "main.h"
+//HouseHolder
 int sinal(double v){
 	if(v > 0 )
 		return -1;
@@ -90,3 +91,80 @@ ResultadoHouseHolder HouseHolder(Matriz A){
 	resultante.HAH = Ai;
 	return resultante;
 }
+//HouseHolder FIM
+
+//Jacobi
+double angulo(Matriz A, int i,int j){
+	double Aij = A.getValor(i,j);
+	double Aii = A.getValor(i,i);
+	double Ajj = A.getValor(j,j);
+
+	if(Aii == Ajj)
+		return M_PI/4;
+	return atan(2 * (Aij/ (Aii-Ajj) ) ) / 2;
+}
+
+Matriz Jij(Matriz A, int i , int j){
+	Matriz Jij(A.getLinhas(),A.getColunas());
+	Jij.identidade();
+
+	double o = angulo(A,i,j);
+	// cout << "Angulo: " << o <<endl;
+	Jij.setValor(i,i,cos(o));
+	Jij.setValor(j,j,cos(o));
+	Jij.setValor(i,j,-sin(o));
+	Jij.setValor(j,i,sin(o));
+
+	return Jij;
+}
+
+double soma(Matriz A){
+	double s = 0;
+	for(int i = 0 ; i < A.getLinhas() ; i++)
+		for(int j = 0 ; j < A.getColunas() ; j++ )
+			if(i != j)
+				s += fabs(A.getValor(i,j));
+	return s;
+}
+
+ResultadoJacobi Jacobi(Matriz A,double erro){
+	Matriz Jc(A.getLinhas(),A.getColunas());
+	Matriz Ak(A.getLinhas(),A.getColunas());
+	ResultadoJacobi resultante;
+	
+	Ak = A;
+	Jc.identidade();
+
+	do{
+		for(int i = 0 ; i < A.getLinhas() - 1 ; i++){
+			for(int j = i + 1 ; j < A.getColunas(); j++){
+				Matriz MJij = Jij(Ak,i,j);
+				// cout << "Jij\n";
+				// MJij.show();
+				Ak = (MJij.transposta() * Ak) * MJij;
+				Jc = Jc * MJij;
+				// cout << "Ak\n";
+				// Ak.show();
+				// cout << "Jc\n";
+				// Jc.show();
+			}
+		}
+	}while(soma(Ak) > erro);
+	resultante.Jc = Jc;
+	resultante.Ak = Ak;
+	Resultado resultados[A.getLinhas()];
+	for(int i = 0 ; i < A.getLinhas() ; i++){
+		resultados[i].autoValor = Ak.getValor(i,i);
+		cout << "Ak valor : " << resultados[i].autoValor<<endl;
+		Vetor autoVetor(A.getLinhas());
+		for(int j = 0 ; j < A.getColunas() ; j++)
+			autoVetor.setValor(j, Jc.getValor(j,i));
+		resultados[i].autoVetor = autoVetor;
+		cout << "Auto vetor\n";
+		resultados[i].autoVetor.show();
+	}
+	resultante.resultados = resultados;
+	return resultante;
+}
+
+//Jacobi FIM

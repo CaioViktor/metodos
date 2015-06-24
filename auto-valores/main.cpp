@@ -84,16 +84,26 @@ int main(){
 	(r3.autoVetor * r3.autoValor).show();
 
 	cout << "---------------------------------\nHouseHolder\nMatriz:\n";
-	Matriz m2(4,4);
-
-	for(int i = 0 ; i < 4 ; i++)
-		for(int j = 0 ; j < 4 ; j++)
-			m2.setValor(i,j,i+j+1);
-	m2.show();
 	cout << "Tridiagonal:\n";
-	ResultadoHouseHolder house = HouseHolder(m2);
+	ResultadoHouseHolder house = HouseHolder(m);
 	house.HAH.show();
 	cout << "H:\n";
 	house.H.show();
+
+	cout << "---------------------------------\nJacobi:\n";
+	ResultadoJacobi jacobi = Jacobi(m,0.0001);
+	cout << "Jc:\n";
+	jacobi.Jc.show();
+	cout << "Ak:\n";
+	jacobi.Ak.show();
+	Resultado* resultados;
+	resultados = jacobi.resultados;
+	for(int i = 0 ; i < jacobi.Jc.getLinhas(); i++){
+		cout << "AutoValor: " << resultados[i].autoValor << endl;
+		// cout << "AutoVetor:\n " ;
+		// jacobi.resultados[i].autoVetor.show();
+	}
+
+
 	return 0;
 }
