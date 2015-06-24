@@ -15,11 +15,20 @@ Vetor Vetor::operator * (Vetor vetor){
 }
 
 Vetor Vetor::operator * (Matriz matriz){
-	if(this->getLinhas() != matriz.getLinhas())
-		return Vetor(0);
-	Vetor resultante(this->getLinhas());
-	for(int i = 0 ; i < this->getLinhas() ; i++ )
-		resultante.setValor(i,this->getValor(i) * matriz.getValor(i,0));
+	Matriz m(this->getLinhas(),this->getColunas());
+	for(int i = 0 ; i < this->getLinhas() ; i++)
+			m.setValor(i,0,this->getValor(i));
+	Vetor resultante;
+	resultante = m * matriz;
+	return resultante;
+}
+
+Vetor Vetor::operator | (Matriz matriz){
+	Matriz m(this->getLinhas(),this->getColunas());
+	for(int i = 0 ; i < this->getLinhas() ; i++)
+			m.setValor(i,0,this->getValor(i));
+	Vetor resultante;
+	resultante = (m.transposta() * matriz).transposta();
 	return resultante;
 }
 

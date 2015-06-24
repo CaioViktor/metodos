@@ -54,7 +54,7 @@ Matriz construirH(Matriz A, int coluna){
 	// n.show();
 	// cout << "nt:\n";
 	// n.transaposta().show();
-	Matriz nnt2 = ( ( n * n.transaposta()) * 2);
+	Matriz nnt2 = ( ( n * n.transposta()) * 2);
 	H = H - nnt2;
 	// cout << "nn:\n";
 	// nnt2.show();

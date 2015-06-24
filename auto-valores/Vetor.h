@@ -4,6 +4,7 @@ public:
 	Vetor();
 	Vetor operator * (Vetor matriz);
 	Vetor operator * (Matriz matriz);
+	Vetor operator | (Matriz matriz);
 	Vetor operator * (double constante);
 	double operator &(Vetor vetor);	
 	void operator = (Matriz matriz);

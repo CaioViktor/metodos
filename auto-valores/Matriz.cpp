@@ -102,7 +102,7 @@ void Matriz::show(){
 	}
 
 }
-Matriz Matriz::transaposta(){
+Matriz Matriz::transposta(){
 	Matriz resultante(this->colunas,this->linhas);
 	for(int i = 0 ; i < resultante.linhas ; i++)
 		for(int j = 0 ; j < resultante.colunas ; j++)

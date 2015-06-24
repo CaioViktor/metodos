@@ -4,41 +4,43 @@ Vetor resolverSistema(Matriz mo,Vetor bo){
 	m = mo;
 	Vetor b;
 	b = bo;
-	if(m.getLinhas() != b.getLinhas())
-		return Vetor();
-	for(int c = 0 ; c < m.getColunas() ; c++){
-		double pivo = m.getValor(c,c);
-		for(int l = 0 ; l < m.getLinhas() ; l++){
-			if( c == l ){
-				for(int k = 0 ; k < m.getColunas() ; k++){
-					m.setValor(l,k,m.getValor(l,k)/pivo);
+	for(int p = 0 ; p < m.getColunas(); p++){
+		double pivo = m.getValor(p,p);
+		for (int l = 0; l < m.getLinhas() ; l++){
+			if(l != p){
+				double fator = (m.getValor(l,p)/pivo) * -1;
+				for(int c = 0 ; c < m.getColunas() ; c++){
+					m.setValor(l,c, m.getValor(l,c) + fator * m.getValor(p,c));
 				}
-				b.setValor(c, b.getValor(c)/pivo );
-			}else{
-				double coeficiente = -1 * (m.getValor(l,c) / pivo);
-				// cout << coeficiente << endl;
-				double vaiZerar = m.getValor(l,c);
-				for(int k = 0 ; k < m.getColunas() ; k++){
-					m.setValor(l,k,m.getValor(l,k) + coeficiente * vaiZerar );
-				}
-				b.setValor(c, b.getValor(c) + coeficiente * b.getValor(c));
+				b.setValor(l,b.getValor(l) + fator * b.getValor(p));
 			}
 		}
 	}
-	// cout <<v<< "m: \n";
-	// m.show();
+	for(int l = 0 ; l < m.getLinhas() ; l++){
+		double pivo = m.getValor(l,l);
+		for(int c = 0 ; c < m.getColunas() ; c++ ){
+			m.setValor(l,c,m.getValor(l,c)/pivo);
+		}
+		b.setValor(l,b.getValor(l)/pivo);
+	}
 	return b;
 }
 int main(){
-	Matriz m(4,4);
-	m.setValor(0,0,3);
-	m.setValor(0,1,1);
-	m.setValor(1,1,3);
-	m.setValor(2,2,4);
-	m.setValor(3,3,3);
-	Vetor v(4);
+	
+	Matriz m (3,3);
+	m.setValor(0,0,4);
+	m.setValor(0,1,2);
+	m.setValor(0,2,1);
+	m.setValor(1,0,2);
+	m.setValor(1,1,8);
+	m.setValor(1,2,2);
+	m.setValor(2,0,1);
+	m.setValor(2,1,2);
+	m.setValor(2,2,6);
+	Vetor v(3);
 	v.identidade();
-	Resultado r = potencia(m, v, 0.001);
+	
+	Resultado r = potencia(m, v, 0.0001);
 	m.show();
 	cout << "* autoVetor:\n";
 	r.autoVetor.show();
@@ -54,7 +56,7 @@ int main(){
 
 
 	cout << "\n\n\n potencia Inversa:\n";
-	Resultado r2 = potenciaInversa(m, v, 0.001);
+	Resultado r2 = potenciaInversa(m, v, 0.0001);
 	m.show();
 	cout << "* autoVetor:\n";
 	r2.autoVetor.show();
@@ -68,7 +70,7 @@ int main(){
 	(r2.autoVetor * r2.autoValor).show();
 
 	cout << "\n\n\n potencia Deslocamento:\n";
-	Resultado r3 = potenciaDeslocamento(m, v, 0.001,2);
+	Resultado r3 = potenciaDeslocamento(m, v, 0.0001,2);
 	m.show();
 	cout << "* autoVetor:\n";
 	r3.autoVetor.show();

@@ -16,7 +16,7 @@ public:
 	Matriz operator - (Matriz matriz);
 	Matriz operator * (double constante);
 	void operator = (Matriz matriz);
-	Matriz transaposta();
+	Matriz transposta();
 	void show();
 
 };
