@@ -152,7 +152,7 @@ ResultadoJacobi Jacobi(Matriz A,double erro){
 	}while(soma(Ak) > erro);
 	resultante.Jc = Jc;
 	resultante.Ak = Ak;
-	JacobiResultados* resultados = new JacobiResultados[A.getLinhas()]();
+	AutovaloresResultados* resultados = new AutovaloresResultados[A.getLinhas()]();
 	for(int i = 0 ; i < A.getLinhas() ; i++){
 		resultados[i].autoValor = Ak.getValor(i,i);
 		// cout << "Ak valor : " << resultados[i].autoValor<<endl;
@@ -185,7 +185,6 @@ Matriz JijQR(Matriz A, int i , int j){
 	Jij.identidade();
 
 	double o = anguloQR(A,i,j);
-	// cout << "Angulo: " << o <<endl;
 	Jij.setValor(i,i,cos(o));
 	Jij.setValor(j,j,cos(o));
 	Jij.setValor(i,j,sin(o));
@@ -216,16 +215,20 @@ ResultadoQR QR(Matriz A, double erro){
 			}
 		}
 		R = QT * A;
-		Ak = Q * R;
-	}while(soma(A - Ak) > erro);
-	cout << "Q\n";
-	Q.show();
-	cout << "R\n";
-	R.show();
-	cout << "Ak\n";
-	Ak.show();
+		Ak = R * Q;
+	}while(soma(Ak) > erro);
 	resultante.Q = Q;
 	resultante.R = R;
 	resultante.QT = QT;
+	resultante.Ak = Ak;
+	AutovaloresResultados* resultados = new AutovaloresResultados[A.getLinhas()]();
+	for(int i = 0 ; i < A.getLinhas() ; i++){
+		resultados[i].autoValor = Ak.getValor(i,i);
+		Vetor autoVetor(A.getLinhas());
+		for(int j = 0 ; j < A.getColunas() ; j++)
+			autoVetor.setValor(j, Q.getValor(j,i));
+		resultados[i].autoVetor = autoVetor;
+	}
+	resultante.resultados = resultados;
 	return resultante;
 }

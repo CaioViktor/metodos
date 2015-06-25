@@ -39,73 +39,158 @@ int main(){
 	m.setValor(2,2,6);
 	Vetor v(3);
 	v.identidade();
-	
-	Resultado r = potencia(m, v, 0.0001);
-	m.show();
-	cout << "* autoVetor:\n";
-	r.autoVetor.show();
-	cout << "=\n";
-	(m*r.autoVetor).show();
-	cout << "------------------------\n autoValor: \n";
-	cout << r.autoValor << endl;
-	cout << "*\n";
-	r.autoVetor.show();
-	cout << "=\n";
-	(r.autoVetor * r.autoValor).show();
-	
-
-
-	cout << "\n\n\n potencia Inversa:\n";
-	Resultado r2 = potenciaInversa(m, v, 0.0001);
-	m.show();
-	cout << "* autoVetor:\n";
-	r2.autoVetor.show();
-	cout << "=\n";
-	(m*r2.autoVetor).show();
-	cout << "------------------------\n autoValor: \n";
-	cout << r2.autoValor << endl;
-	cout << "*\n";
-	r2.autoVetor.show();
-	cout << "=\n";
-	(r2.autoVetor * r2.autoValor).show();
-
-	cout << "\n\n\n potencia Deslocamento:\n";
-	Resultado r3 = potenciaDeslocamento(m, v, 0.0001,2);
-	m.show();
-	cout << "* autoVetor:\n";
-	r3.autoVetor.show();
-	cout << "=\n";
-	(m*r3.autoVetor).show();
-	cout << "------------------------\n autoValor: \n";
-	cout << r3.autoValor << endl;
-	cout << "*\n";
-	r3.autoVetor.show();
-	cout << "=\n";
-	(r3.autoVetor * r3.autoValor).show();
-
-	cout << "---------------------------------\nHouseHolder\nMatriz:\n";
-	cout << "Tridiagonal:\n";
-	ResultadoHouseHolder house = HouseHolder(m);
-	house.HAH.show();
-	cout << "H:\n";
-	house.H.show();
-
-	cout << "---------------------------------\nJacobi:\n";
-	ResultadoJacobi jacobi = Jacobi(m,0.0001);
-	cout << "Jc:\n";
-	jacobi.Jc.show();
-	cout << "Ak:\n";
-	jacobi.Ak.show();
-	JacobiResultados* resultados =  jacobi.resultados;
-	for(int i = 0 ; i < jacobi.Jc.getLinhas(); i++){
-		cout << "AutoValor: " << resultados[i].autoValor << endl;
-		cout << "AutoVetor:\n" ;
-		jacobi.resultados[i].autoVetor.show();
+	double erro = 0.0001;
+	int op = 0;
+	while(op != 7){
+		cout << "Matriz utilizada:\n";
+		m.show();
 		cout << endl;
+		cout << "Chute Inicial:\n";
+		v.show();
+		cout << endl;
+		cout << "Erro:\n" << erro;
+		cout << endl;
+		cout << "Escolha a opção que deseja ver:\n(1)Potência Regular\n(2)Potência Inversa\n(3)Potência Com Deslocamento\n";
+		cout << "(4)HouseHolder\n(5)Jacobi\n(6)QR\n(7)Sair\n";
+		cin >> op;
+		system("clear");
+		if(op == 1){
+			Resultado r = potencia(m, v, erro);
+			cout << "Potência Regular:\n";
+			cout << "Auto-Vetor:\n";
+			r.autoVetor.show();
+			cout << "Auto-Valor: \n";
+			cout << r.autoValor << endl;
+			cout << "----------------------------TESTE-------------------------\n";
+			m.show();
+			cout << "*\n";
+			r.autoVetor.show();
+			cout << "=\n";
+			(m*r.autoVetor).show();
+			cout << "--------------------------------------------------------\n";
+			cout << r.autoValor << endl;
+			cout << "*\n";
+			r.autoVetor.show();
+			cout << "=\n";
+			(r.autoVetor * r.autoValor).show();
+		}
+		if(op == 2){
+			Resultado r2 = potenciaInversa(m, v, erro);
+			cout << "Potência Inversa:\n";
+			cout << "Auto-Vetor:\n";
+			r2.autoVetor.show();
+			cout << "Auto-Valor: \n";
+			cout << r2.autoValor << endl;
+			cout << "----------------------------TESTE-------------------------\n";
+			m.show();
+			cout << "*\n";
+			r2.autoVetor.show();
+			cout << "=\n";
+			(m*r2.autoVetor).show();
+			cout << "--------------------------------------------------------\n";
+			cout << r2.autoValor << endl;
+			cout << "*\n";
+			r2.autoVetor.show();
+			cout << "=\n";
+			(r2.autoVetor * r2.autoValor).show();
+		}
+		if(op == 3){
+			Resultado r3 = potenciaDeslocamento(m, v, erro,2);
+			cout << "Potência Deslocamento:\n";
+			cout << "Auto-Vetor:\n";
+			r3.autoVetor.show();
+			cout << "Auto-Valor: \n";
+			cout << r3.autoValor << endl;
+			cout << "----------------------------TESTE-------------------------\n";
+			m.show();
+			cout << "*\n";
+			r3.autoVetor.show();
+			cout << "=\n";
+			(m*r3.autoVetor).show();
+			cout << "--------------------------------------------------------\n";
+			cout << r3.autoValor << endl;
+			cout << "*\n";
+			r3.autoVetor.show();
+			cout << "=\n";
+			(r3.autoVetor * r3.autoValor).show();
+		}
+		if(op == 4){
+			cout << "HouseHolder\n";
+			cout << "Tridiagonal:\n";
+			ResultadoHouseHolder house = HouseHolder(m);
+			house.HAH.show();
+			cout << "H:\n";
+			house.H.show();
+		}
+		if(op == 5){
+			ResultadoJacobi jacobi = Jacobi(m,erro);
+			cout << "Jacobi:\n";
+			cout << "Jc:\n";
+			jacobi.Jc.show();
+			cout << "Ak:\n";
+			jacobi.Ak.show();
+			AutovaloresResultados* resultados =  jacobi.resultados;
+			for(int i = 0 ; i < jacobi.Jc.getLinhas(); i++){
+				cout << "--------------------------------------------------------\n";
+				cout << "AutoValor:\n" << resultados[i].autoValor << endl;
+				cout << "AutoVetor:\n";
+				jacobi.resultados[i].autoVetor.show();
+				cout << "----------------------------TESTE-------------------------\n";
+				m.show();
+				cout << "*\n";
+				jacobi.resultados[i].autoVetor.show();
+				cout << "=\n";
+				(m*jacobi.resultados[i].autoVetor).show();
+				cout << "--------------------------------------------------------\n";
+				cout << resultados[i].autoValor << endl;
+				cout << "*\n";
+				jacobi.resultados[i].autoVetor.show();
+				cout << "=\n";
+				(jacobi.resultados[i].autoVetor * resultados[i].autoValor).show();
+				cout << endl;
+				cout << "------------------------------FIM-------------------------------\n";
+			}
+		}
+		if(op == 6){
+			ResultadoQR qr = QR(m,erro);
+			cout << "QR:\n";
+			cout << "Q\n";
+			qr.Q.show();
+			cout << "R\n";
+			qr.R.show();
+			cout << "QT\n";
+			qr.QT.show();
+			cout << "Ak\n";
+			qr.Ak.show();
+			AutovaloresResultados* resultadosQR =  qr.resultados;
+			for(int i = 0 ; i < qr.Ak.getLinhas(); i++){
+				cout << "AutoValor:\n" << resultadosQR[i].autoValor << endl;
+				cout << "AutoVetor:\n";
+				qr.resultados[i].autoVetor.show();
+				cout << "----------------------------TESTE-------------------------\n";
+				m.show();
+				cout << "*\n";
+				qr.resultados[i].autoVetor.show();
+				cout << "=\n";
+				(m*qr.resultados[i].autoVetor).show();
+				cout << "---------------------------------------------------------\n";
+				cout << resultadosQR[i].autoValor << endl;
+				cout << "*\n";
+				qr.resultados[i].autoVetor.show();
+				cout << "=\n";
+				(qr.resultados[i].autoVetor * resultadosQR[i].autoValor).show();
+				cout << endl;
+				cout << "------------------------------FIM-------------------------------\n";
+			}
+		}
+		if(op == 7)
+			return 0;
+		cout << "Deseja continuar continuar?(S/N)...\n";
+		char p;
+		cin >> p;
+		system("clear");
+		if(p == 'N' || p == 'n')
+			return 0;
 	}
-
-	cout << "---------------------------------\nQR:\n";
-	QR(m,0.0001);
-
 	return 0;
 }
