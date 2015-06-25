@@ -168,3 +168,64 @@ ResultadoJacobi Jacobi(Matriz A,double erro){
 }
 
 //Jacobi FIM
+
+//QR
+
+double anguloQR(Matriz A, int i,int j){
+	double Aij = A.getValor(i,j);
+	double Ajj = A.getValor(j,j);
+
+	if(0 == Ajj)
+		return M_PI/2;
+	return atan( Aij/ Ajj  );
+}
+
+Matriz JijQR(Matriz A, int i , int j){
+	Matriz Jij(A.getLinhas(),A.getColunas());
+	Jij.identidade();
+
+	double o = anguloQR(A,i,j);
+	// cout << "Angulo: " << o <<endl;
+	Jij.setValor(i,i,cos(o));
+	Jij.setValor(j,j,cos(o));
+	Jij.setValor(i,j,sin(o));
+	Jij.setValor(j,i,-sin(o));
+
+	return Jij;
+}
+
+
+ResultadoQR QR(Matriz A, double erro){
+	Matriz Q(A.getLinhas(),A.getColunas());
+	Matriz QT(A.getLinhas(),A.getColunas());
+	Matriz R(A.getLinhas(),A.getColunas());
+	Matriz Ak(A.getLinhas(),A.getColunas());
+	ResultadoQR resultante;
+	Q.identidade();
+	QT.identidade();
+	Ak = A;
+
+	do{
+		for(int i = 0 ; i < A.getLinhas() - 1 ; i++){
+			for(int j = i + 1 ; j < A.getColunas(); j++){
+				Matriz MJij = JijQR(Ak,i,j);
+				Ak = (MJij.transposta() * Ak);
+				QT = MJij.transposta() * QT;
+				Q = Q * MJij;
+
+			}
+		}
+		R = QT * A;
+		Ak = Q * R;
+	}while(soma(A - Ak) > erro);
+	cout << "Q\n";
+	Q.show();
+	cout << "R\n";
+	R.show();
+	cout << "Ak\n";
+	Ak.show();
+	resultante.Q = Q;
+	resultante.R = R;
+	resultante.QT = QT;
+	return resultante;
+}
