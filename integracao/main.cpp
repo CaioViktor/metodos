@@ -3,7 +3,10 @@
 double f(double x){
 	// return 1 + pow((x/2),2);
 	// return pow(x,9);
-	return x;
+	// return x;
+	// return (1/(1+x*x));//Teste Hermite
+	// return cos(x);//Teste Cheb
+	return (exp(x)/(sqrt(1-x*x))); //Teste expo
 }
 double deltaX(int n,double a,double b){
 	return (b - a)/n;
@@ -49,13 +52,13 @@ int main(){
 		cout << "Entre com o valor de N:\n";
 		cin >> n;
 		switch(metodo){
-			case 3:
+			case 5:
 				value =  gaussHermite( n);
 			break;
 			case 4:
 				value =  gaussLaguerre( n);
 			break;
-			case 5:
+			case 3:
 				value =  gaussChebyshev( n);
 			break;
 			default:

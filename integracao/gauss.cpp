@@ -130,8 +130,8 @@ double gaussLaguerre(int n){
 
 double gaussChebyshev(int n){
 	double i = 0;
-	for(int k = 0 ; k <= n; k++)
-		i+= f(cos((2*k -1)*(M_PI/n) )); 
+	for(int k = 0 ; k < n; k++)
+		i+= f(cos(((k -1/2)/n)*M_PI )); 
 	return (M_PI/n)*i;
 }
 
